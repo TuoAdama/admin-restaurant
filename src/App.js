@@ -1,9 +1,10 @@
-import Form from './components/Form'
+import {Header, Container} from './components/Index'
 
 function App() {
   return (
     <div>
-      <Form/>
+      <Header/>
+      <Container/>
     </div>
   );
 }
