@@ -46,10 +46,8 @@ class Form extends Component {
   handlerChangeCategorie(event) {}
 
   onChangeInput(event) {
-    this.plat = {
-      ...this.plat,
-      [event.target.name]: event.target.value,
-    };
+    const element = event.target;
+    this.plat[element.name] = element.value
   }
 
   handleSubmit(event) {
@@ -62,13 +60,13 @@ class Form extends Component {
     this.onSaveImagesInStorage(this.getImages());
   }
 
-  onSavePlatInFirebase(plats) {
+  onSavePlatInFirebase() {
     firebase
       .firestore()
       .collection("plats")
       .add(this.plat)
       .then((doc) => {
-        console.log(doc);
+        alert("Enregistré avec succès");
       })
       .catch((error) => console.log(error));
   }
@@ -127,7 +125,7 @@ class Form extends Component {
                 name="categorie"
                 id="categorie"
                 className="form-select"
-                onChange={this.onChangeInput}
+                onChange={this.onChangeInput.bind(this)}
               >
                 {this.state.categories.map((categorie) => (
                   <option value={categorie.libelle} key={categorie.id}>
